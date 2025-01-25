@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        <table border="1">
+            <h2>Book Details</h2>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>ISBN</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Published Date</th>
+                <th>Genre</th>
+            <th>Description</th>
+            <th>Last updated timestamp</th>
+            <th>Created timestamp</th> 
+                <th>Action</th>
+
+            </tr>
+            <tr>
+                <td>{{ book['_id'] }}</td>
+                <td>{{ book['title'] }}</td>
+                <td>{{ book['author'] }}</td>
+                <td>{{ book['isbn'] }}</td>
+                <td>{{ book['price'] }}</td>
+                <td>{{ book['quantity'] }}</td>
+                <td>{{ book['published_date'] }}</td>
+                <td>{{ book['genre'] }}</td>
+                <td>{{ book['description'] }}</td>
+                <td>{{ book['last_updated_timestamp'] }}</td>
+                <td>{{ book['created_timestamp'] }}</td> 
+    
+                <td>
+                    <form action="/api/books/{{ book['_id'] }}" method="post">
+                        <input type="hidden" name="_method" value="delete">
+                        <button type="submit">Delete</button>
+                    </form>
+                    <a href="/api/edit/{{ book['_id'] }}">Edit</a>
+                </td>
+            </tr>
+            </table> 
+            <div class="div1">
+                <a href="/api/books">Back to Book List</a>
+            </div>
+        
+    
+        
+    </body>
+</html>

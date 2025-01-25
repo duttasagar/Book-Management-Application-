@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Management System</title>
+</head>
+<style>
+    .container{
+        display: flex;
+        justify-content: center
+    }
+    form{
+        width: 600px;
+        background-color: aliceblue;
+        margin-top: 10px;
+        padding-top: 20px;
+        
+        padding-bottom: 20px;
+    }
+    .heading{
+            background-color: aliceblue;
+            display: flex;
+            justify-content: center;
+        }
+        input{
+            margin-bottom: 10px;
+        }
+        select,textarea {
+            margin-bottom: 10px;
+
+        }
+        .div1{
+            display: flex;
+            justify-content: center;
+        }
+        label{
+            margin-right: 5px;
+        }
+
+
+</style>
+<body>
+<div class= "heading">
+    <h2>Update Book</h2>
+
+</div>
+<div class="container">
+    <form action="/api/update/{{ book['_id'] }}" method="POST">
+        <div class="div1">
+            <label for="title">Title</label><br>
+            <input type="text" id="title" name="title" value="{{book['title']}}" placeholder="Title"  required ><br>
+       </div>
+       <div class="div1">
+            <label for="author" >Author </label><br>
+            <input type="text" id="author" name="author" value="{{book['author']}}" placeholder="Author"   required><br>
+        </div>
+        <div class="div1">
+            <label for="isbn">ISBN</label><br>
+            <input type="text" id="isbn" name="isbn" value="{{book['isbn']}}" placeholder="ISBN" required><br>
+        </div>
+
+        <div class="div1">
+            <label for="price">Price</label><br>
+            <input type="number" id="price" name="price" value="{{book['price']}}" placeholder="Price" required><br>
+        </div>
+        <div class="div1">
+            <label for="quantity">Quantity</label><br>
+            <input type="number" id="quantity" name="quantity" value="{{book['quantity']}}" placeholder="Quantity" required><br>
+       </div>
+       <div class="div1">
+            <label for="published_date">Published Date</label><br>
+            <input type="date" id="published_date" value="{{book['published_date']}}" name="published_date" required><br>
+     </div>
+     <div class="div1">
+        <label for="genre">Genre</label><br>
+        <select id="genre" value="{{book['genre']}} " name="genre" >
+            <option value="Fiction">Fiction</option>
+            <option value="Non-Fiction">Non-Fiction</option>
+            <option value="Sci-Fi">Sci-Fi</option>
+            <option value="Fantasy">Fantasy</option>
+            <option value="Mystery">Mystery</option>
+            <option value="Biography">Biography</option>
+        </select><br>
+    </div>
+
+    <div class="div1">
+        <label for="description">Description</label><br>
+        <textarea id="description" value="{{book['description']}}" name="description"   placeholder="Description"></textarea><br>
+    </div>
+    <div class="div1">
+         <label for="created_timestamp">Created Timestamp</label>
+        <input  type="date" id="created_timestamp" value="{{book['created_timestamp']}}" name="created_timestamp" >
+    </div>
+    <div class="div1">
+        <label for="last_updated_timestamp">Last Updated Timestamp</label>
+        <input type="date" id="last_updated_timestamp" value="{{book['last_updated_timestamp']}}" name="last_updated_timestamp" value="last_updated_timestamp">
+    </div>
+    <div class="div1">
+        <button type="submit">Update</button>
+    </div>
+    <div class="div1">
+        <a href="/api/books">Back to Book List</a>
+    </div>
+    </form>
+
+</div>
+
+</body>
+</html>

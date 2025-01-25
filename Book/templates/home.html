@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Management System</title>
+    <style>
+        *{
+            padding: 0px;
+            margin: 0px;
+        }
+        .parent_container{
+            display: flex;
+            justify-content: space-between;
+        }
+        .heading{
+            background-color: aliceblue;
+            display: flex;
+            justify-content: center;
+        }
+        .left_div{
+            width: 30%;
+            padding-left: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding-top: 15px;
+            padding-bottom: 15px;
+            
+
+        }
+        .left_div h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        input{
+            margin-bottom: 10px;
+        }
+        select,textarea {
+            margin-bottom: 10px;
+
+        }
+        .right_div{
+            border-radius: 8px;
+            width: 65%;
+            padding-top: 15px;
+        }
+        .table_header{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .table_header h2{
+            text-align: center;
+        }
+        table{
+            width: 95%;
+            margin: 15px;        }
+
+
+    </style>
+</head>
+<body>
+<div class="heading">
+    <h1>Book Management</h1>
+</div>
+    <div class="parent_container">
+    <div class="left_div">
+    <h2>Create Book</h2>
+
+
+
+    <form action='/api/books' method="POST" >
+        <div class="div1">
+            <label for="title">Title</label>
+            <input type="text" id="title" name="title" placeholder="Title" required><br>
+        </div>
+        <div class="div1">
+            <label for="author">Author</label>
+            <input type="text" id="author" name="author" placeholder="Author" required><br>
+        </div>
+        <div class="div1">
+            <label for="isbn">ISBN</label>
+            <input type="text" id="isbn" name="isbn" placeholder="ISBN" required><br>
+        </div>
+        <div class="div1">
+            <label for="price">Price</label>
+            <input type="number" id="price" name="price" placeholder="Price" required><br>
+        </div>
+        <div class="div1">
+            <label for="quantity">Quantity</label>
+            <input type="number" id="quantity" name="quantity" placeholder="Quantity" required><br>
+        </div>
+        <div class="div1">
+            <label for="published_date">Published Date</label>
+            <input type="date" id="published_date" name="published_date" required><br>
+      </div>
+      <div class="div1">
+            <label for="genre">Genre</label>
+            <select id="genre" name="genre">
+                <option value="Fiction">Fiction</option>
+                <option value="Non-Fiction">Non-Fiction</option>
+                <option value="Sci-Fi">Sci-Fi</option>
+                <option value="Fantasy">Fantasy</option>
+                <option value="Mystery">Mystery</option>
+                <option value="Biography">Biography</option>
+            </select><br>
+    </div>
+    <div class="div1">
+        <label for="description">Description</label>
+        <textarea id="description" name="description" placeholder="Description" ></textarea>
+    </div>
+    <div class="div1">
+        <label for="created_timestamp">Created Timestamp</label>
+        <input  type="date" id="created_timestamp" name="created_timestamp" value="created_timestamp"><br>
+    </div>
+    <div class="div1">  
+        <label for="last_updated_timestamp">Last Updated Timestamp</label>
+        <input type="date" id="last_updated_timestamp" name="last_updated_timestamp" value="last_updated_timestamp"><br><br>
+    </div>
+    <div class="div1">
+        <button type="submit">Add Book</button>
+    </div>
+    </form>
+</div>
+
+<div class="right_div">
+    <div class="table_header">
+    <div>
+        <h2>All Books</h2>
+    <div>
+    <!-- Search Form -->
+    <form method="post" action="/api/search/">
+        <input type="text" name="search_query" placeholder="Enter book title, author, or genre" required>
+        <button type="submit">Search</button>
+    </form>
+</div>
+</div>
+</div>
+
+
+    <table border="1">
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>ISBN</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Published Date</th>
+            <th>Action</th>
+            <th>More</th>
+        </tr>
+        
+        {% for book in books %}
+        <tr>
+            <td>{{ book['title'] }}</td>
+            <td>{{ book['author'] }}</td>
+            <td>{{ book['isbn'] }}</td>
+            <td>{{ book['price'] }}</td>
+            <td>{{ book['quantity'] }}</td>
+            <td>{{ book['published_date'] }}</td>
+            <td>
+                <form action="/api/books/{{ book['_id'] }}" method="post">
+                    <input type="hidden" name="_method" value="delete">
+                    <button type="submit">Delete</button>
+                </form>
+                <a href="/api/edit/{{ book['_id'] }}">Edit</a>
+            </td>
+            <td> <a href="/api/book_detail/{{ book['_id'] }}">DETAIL</a>
+                
+            </td>
+        </tr>
+        {% endfor %}
+
+    </table> 
+
+</div>
+<div>
+
+
+
+
+</body>
+</html>
+
